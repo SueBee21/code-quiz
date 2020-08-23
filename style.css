@@ -1,0 +1,19 @@
+/* Navbar */
+nav {
+    background-color: lightcyan;
+}
+
+/* home page main content */
+section {
+margin: auto;
+    text-align: center;
+    margin-top: 100px;
+    width: 700px;
+}
+p {
+    font-size: medium;
+}
+.btn {
+    color: white;
+    background-color: mediumblue;
+}
