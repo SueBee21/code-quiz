@@ -4,7 +4,7 @@ nav {
 }
 
 /* home page main content */
-section {
+#home-screen {
 margin: auto;
     text-align: center;
     margin-top: 100px;
@@ -16,4 +16,8 @@ p {
 .btn {
     color: white;
     background-color: mediumblue;
+}
+
+#quiz {
+    display: none;
 }

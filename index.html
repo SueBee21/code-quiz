@@ -13,10 +13,10 @@
     <nav>
         <a href="#home">Home</a>
         <a href="#highscore">View High Score</a>
-        <a href="time">Time</a>
+        <a href="#time">Time</a>
     </nav>
     <!-- Home page main content -->
-    <section>
+    <section id="home-screen">
         <h1>Coding Quiz Challenge</h1>
         <h2>
             <p>Try to answer the following challenge questions before the timer runs out for a high score!
@@ -25,8 +25,21 @@
             </p>
         </h2>
         <div></div>
-        <button id="start-quiz" class="btn">Start Quiz!</button>
+        <button id="start-button" class="btn">Start Quiz!</button>
     </section>
+
+    <section id="quiz"> 
+        <div id="question">
+            <p>Question</p>
+        </div>
+        <div id="select-choices">
+            <div class="choice" id="a">A</div>
+            <div class="choice" id="b">B</div>
+            <div class="choice" id="c">C</div>
+            <div class="choice" id="d">D</div>
+        </div>
+    </section>
+    <script src="script.js"></script>
 </body>
 
 </html>
