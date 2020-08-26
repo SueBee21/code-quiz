@@ -18,10 +18,23 @@ p {
     background-color: mediumblue;
 }
 
+
+/* quiz */
 #quiz {
     display: none;
     margin: auto;
     text-align: center;
     margin-top: 100px;
     width: 700px;
+}
+
+#question {
+    font-size: medium;
+    font-weight: bold;
+}
+
+.choice {
+    display: block;
+    background-color: lightgoldenrodyellow;
+    margin: auto;
 }

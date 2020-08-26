@@ -1,14 +1,19 @@
-// start screen
+// get elements
 var startBtn = document.getElementById("start-button");
 var homeScreen = document.getElementById("home-screen");
-startBtn.addEventListener("click", startQuiz);
 
 var question = document.getElementById("question");
 var selectChoices = document.getElementById("select-choices");
+var choiceBtn = document.getElementById("choice")
 var choiceA = document.getElementById("a");
 var choiceB = document.getElementById("b");
 var choiceC = document.getElementById("c");
 var choiceD = document.getElementById("d");
+var highscore = document.getElementById("highscore")
+var time = document.getElementById("time")
+
+// start quiz
+startBtn.addEventListener("click", startQuiz);
 
 function startQuiz() {
     homeScreen.style.display = "none";
@@ -18,9 +23,6 @@ function startQuiz() {
 }
 
 // Questions
-
-
-
 
 let questionList = [
     {
@@ -42,21 +44,38 @@ let questionList = [
     }
 ]
 
-var lastQuestion = question.length -1
+var lastQuestion = questionList.length - 1
 var questionNumber = 0
 
 function askQuestion() {
     var q = questionList[questionNumber];
 
     question.innerHTML = q.question;
-    choiceA.innerHTML = q.choiceA
-    choiceB.innerHTML = q.choiceB
-    choiceC.innerHTML = q.choiceC
-    choiceD.innerHTML = q.choiceD
+    choiceA.innerHTML = q.choiceA;
+    choiceB.innerHTML = q.choiceB;
+    choiceC.innerHTML = q.choiceC;
+    choiceD.innerHTML = q.choiceD;
 
 }
-// var highscore = document.getElementById("highscore")
-// var time = document.getElementById("time")
+
+choiceBtn.addEventListener("click", scoreQuestion);
+
+function scoreQuestion() {
+
+    if (questionList[i].correct == choiceBtn) {
+        alert("correct!")
+
+    }
+
+}
+
+
+// next question
+function nextQuestion() {
+    for (var i = 0; i < questionList.length; i++);
+
+}
+
 
 
 
