@@ -11,6 +11,7 @@ var choiceC = document.getElementById("c");
 var choiceD = document.getElementById("d");
 var highscore = document.getElementById("highscore")
 var time = document.getElementById("time")
+var score = 0
 
 // start quiz
 startBtn.addEventListener("click", startQuiz);
@@ -22,7 +23,9 @@ function startQuiz() {
     askQuestion();
 }
 
-// Questions
+// start timer
+
+// Questions list
 
 let questionList = [
     {
@@ -31,7 +34,7 @@ let questionList = [
         choiceB: "B: purple",
         choiceC: "C: white",
         choiceD: "D: yellow",
-        correct: "A",
+        correct: "D",
     },
     {
         question: "This is question 2?",
@@ -43,10 +46,9 @@ let questionList = [
 
     }
 ]
-
-var lastQuestion = questionList.length - 1
 var questionNumber = 0
 
+// ask questions
 function askQuestion() {
     var q = questionList[questionNumber];
 
@@ -56,19 +58,27 @@ function askQuestion() {
     choiceC.innerHTML = q.choiceC;
     choiceD.innerHTML = q.choiceD;
 
+    console.log(q.correct)
 }
 
-choiceBtn.addEventListener("click", scoreQuestion);
+// register answer and score question
 
 function scoreQuestion() {
 
-    if (questionList[i].correct == choiceBtn) {
-        alert("correct!")
+    choiceBtn.addEventListener("click", scoreQuestion);
+    var userAnswer = choiceBtn.id
 
+console.log(userAnswer);
+// if correct, increase score
+    if (q.correct == choiceBtn) {
+        alert("correct!");
+        score ++
+    }
+    else {
+        alert("incorrect");
     }
 
 }
-
 
 // next question
 function nextQuestion() {
@@ -77,6 +87,8 @@ function nextQuestion() {
 }
 
 
+// final score 
 
+// high scores
 
 

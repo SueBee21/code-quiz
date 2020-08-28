@@ -38,3 +38,12 @@ p {
     background-color: lightgoldenrodyellow;
     margin: auto;
 }
+
+/* high scores */
+#high-scores {
+    display: none;
+    margin: auto;
+    text-align: center;
+    margin-top: 100px;
+    width: 700px;
+}
