@@ -4,7 +4,7 @@ var homeScreen = document.getElementById("home-screen");
 
 var question = document.getElementById("question");
 var selectChoices = document.getElementById("select-choices");
-var choiceBtn = document.getElementById("choice")
+var choiceBtn = document.getElementsByClassName("choice")
 var choiceA = document.getElementById("a");
 var choiceB = document.getElementById("b");
 var choiceC = document.getElementById("c");
@@ -34,7 +34,7 @@ let questionList = [
         choiceB: "B: purple",
         choiceC: "C: white",
         choiceD: "D: yellow",
-        correct: "D",
+        correct: "d",
     },
     {
         question: "This is question 2?",
@@ -42,7 +42,7 @@ let questionList = [
         choiceB: "second",
         choiceC: "third",
         choiceD: "fourth",
-        correct: "C",
+        correct: "c",
 
     }
 ]
@@ -63,28 +63,34 @@ function askQuestion() {
 
 // register answer and score question
 
+
 function scoreQuestion() {
-
     choiceBtn.addEventListener("click", scoreQuestion);
-    var userAnswer = choiceBtn.id
 
-console.log(userAnswer);
-// if correct, increase score
-    if (q.correct == choiceBtn) {
-        alert("correct!");
-        score ++
+
+
+    var userResponse = this.choiceBtn.id;
+    console.log(userResponse);
+
+    // if correct, increase score
+    if (q.correct == userResponse) {
+        alert("Correct!");
+        score++
     }
     else {
-        alert("incorrect");
+        alert("Incorrect. The correct answer is " + q.correct);
     }
 
 }
 
-// next question
-function nextQuestion() {
-    for (var i = 0; i < questionList.length; i++);
 
-}
+
+
+// // next question
+// function nextQuestion() {
+//     for (var i = 0; i < questionList.length; i++);
+
+// }
 
 
 // final score 
