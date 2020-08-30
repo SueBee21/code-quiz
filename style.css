@@ -3,6 +3,7 @@ nav {
     background-color: lightcyan;
 }
 
+
 /* home page main content */
 #home-screen {
 margin: auto;
@@ -40,7 +41,7 @@ p {
 }
 
 /* high scores */
-#high-scores {
+#score-page {
     display: none;
     margin: auto;
     text-align: center;
