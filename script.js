@@ -34,8 +34,6 @@ let questionList = [
         choiceC: "C: white",
         choiceD: "D: yellow",
         correct: "D: yellow",
-
-
     },
     {
         question: "This is question 2?",
@@ -44,16 +42,14 @@ let questionList = [
         choiceC: "third",
         choiceD: "fourth",
         correct: "first",
-
     }
 ]
 var questionNumber = 0
 var q = questionList[questionNumber];
+
 console.log(q)
 // ask questions
 function askQuestion() {
-
-
 
     question.innerHTML = q.question;
     choiceA.innerHTML = q.choiceA;
@@ -78,38 +74,34 @@ function scoreQuestion(event) {
 
     var userResponse = buttonSelected.textContent;
     console.log(userResponse)
-    // if correct, increase score
-    if (q.correct == userResponse) {
-        alert("Correct! The answer is " + q.correct);
-        score++;
-        nextQuestion;
 
+
+
+    selectChoices.addEventListener("click", function (event) {
+        event.preventDefault();
+        if (q.correct == userResponse) {
+            score++;
+
+            var item = document.createElement("div");
+            item.textContent = "Correct! The answer is " + q.correct
+            quiz.append(item);
+
+            var nextButton = document.createElement("button");
+            nextButton.textContent = "Next";
+            quiz.append(nextButton);
         }
         else {
-            alert("Incorrect. The correct answer is " + q.correct);
-            nextQuestion()
+            var item = document.createElement("div");
+            item.textContent = "Incorrect. The correct answer is " + q.correct
+            quiz.append(item);
 
+            var nextButton = document.createElement("button");
+            nextButton.textContent = "Next";
+            quiz.append(nextButton);
         }
-
-    }
-function nextQuestion() {
-
-        for (var i = 0; i < questionList.length; i++); {
-            console.log(questionNumber[i].value)
-            questionNumber[i].textContent;
-            askQuestion();
-
-
-        }
+    });
 
 }
-
-// function nextQuestion() {
-//     for (var i = 0; i < questionList.length; i++);{
-//  var next = askQuestion(1);
-//  console.log(nextQuestion())
-//  return next;
-//     }
 
 
 
