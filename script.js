@@ -4,7 +4,6 @@ var homeScreen = document.getElementById("home-screen");
 
 var question = document.getElementById("question");
 var selectChoices = document.getElementById("select-choices");
-var choiceBtn = document.getElementsByClassName("choice")
 var choiceA = document.getElementById("a");
 var choiceB = document.getElementById("b");
 var choiceC = document.getElementById("c");
@@ -12,7 +11,7 @@ var choiceD = document.getElementById("d");
 var highscore = document.getElementById("highscore")
 var time = document.getElementById("time")
 var score = 0
-
+var correct = []
 // start quiz
 startBtn.addEventListener("click", startQuiz);
 
@@ -34,7 +33,9 @@ let questionList = [
         choiceB: "B: purple",
         choiceC: "C: white",
         choiceD: "D: yellow",
-        correct: "d",
+        correct: "D: yellow",
+
+
     },
     {
         question: "This is question 2?",
@@ -42,15 +43,17 @@ let questionList = [
         choiceB: "second",
         choiceC: "third",
         choiceD: "fourth",
-        correct: "c",
+        correct: "first",
 
     }
 ]
 var questionNumber = 0
-
+var q = questionList[questionNumber];
+console.log(q)
 // ask questions
 function askQuestion() {
-    var q = questionList[questionNumber];
+
+
 
     question.innerHTML = q.question;
     choiceA.innerHTML = q.choiceA;
@@ -63,38 +66,58 @@ function askQuestion() {
 
 // register answer and score question
 
+choiceA.addEventListener("click", scoreQuestion);
+choiceB.addEventListener("click", scoreQuestion);
+choiceC.addEventListener("click", scoreQuestion);
+choiceD.addEventListener("click", scoreQuestion);
 
-function scoreQuestion() {
-    choiceBtn.addEventListener("click", scoreQuestion);
+function scoreQuestion(event) {
 
+    var buttonSelected = event.target
+    console.log(buttonSelected)
 
-
-    var userResponse = this.choiceBtn.id;
-    console.log(userResponse);
-
+    var userResponse = buttonSelected.textContent;
+    console.log(userResponse)
     // if correct, increase score
     if (q.correct == userResponse) {
-        alert("Correct!");
-        score++
+        alert("Correct! The answer is " + q.correct);
+        score++;
+        nextQuestion;
+
+        }
+        else {
+            alert("Incorrect. The correct answer is " + q.correct);
+            nextQuestion()
+
+        }
+
     }
-    else {
-        alert("Incorrect. The correct answer is " + q.correct);
-    }
+function nextQuestion() {
+
+        for (var i = 0; i < questionList.length; i++); {
+            console.log(questionNumber[i].value)
+            questionNumber[i].textContent;
+            askQuestion();
+
+
+        }
 
 }
 
-
-
-
-// // next question
 // function nextQuestion() {
-//     for (var i = 0; i < questionList.length; i++);
+//     for (var i = 0; i < questionList.length; i++);{
+//  var next = askQuestion(1);
+//  console.log(nextQuestion())
+//  return next;
+//     }
 
-// }
+
+
+// next question
+
+
 
 
 // final score 
 
 // high scores
-
-
