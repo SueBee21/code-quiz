@@ -20,7 +20,7 @@
         <h1>Coding Quiz Challenge</h1>
             <p>Try to answer the following 5 challenge questions before the timer runs out for a high score!
             </p>
-            <p>You have 50 seconds to start. Incorrect scores will remove 10 seconds from the clock. Click the button to start the quiz.
+            <p>You have 60 seconds to start. Incorrect scores will remove 10 seconds from the clock. Click the button to start the quiz.
             </p>
         <div></div>
         <button id="start-button" class="btn">Start Quiz!</button>
@@ -38,11 +38,20 @@
         </div>
     </section>
 
+    <section id = "enter-initials">
+        <p id = "final-score"></p>
+        <br>
+        <p>Enter Your Initials: </p>
+        <input id= "your-initials" type= text placeholder="Your Initials Here">
+        <button id= "submit" >Submit</button>
+
+    </section>
+
     <section id="score-page">
         <h2>High Scores!</h2>
             <p>Your Score:</p>
-
-            <input id= "initials">
+            <br>
+            <ol id="score-list"></ol>
     </section>
     <script src="script.js"></script>
 </body>

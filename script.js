@@ -1,4 +1,5 @@
 // get elements
+var homeBtn = document.getElementById("home")
 var startBtn = document.getElementById("start-button");
 var homeScreen = document.getElementById("home-screen");
 var nextButton = document.createElement("button");
@@ -10,16 +11,17 @@ var choiceC = document.getElementById("c");
 var choiceD = document.getElementById("d");
 var scoreBtn = document.getElementById("score");
 var scorePage = document.getElementById("score-page");
-var initials = document.getElementById("initials");
+var initialsPage = document.getElementById("enter-initials");
+var yourInitials = document.getElementById("your-initials")
+var finalScore = document.getElementById("final-score")
 var time = document.getElementById("timer");
 var displayTime = document.getElementById("display-time")
 var item = document.createElement("div");
-// var score = [];
 var correct = [];
 var questionNumber = 0;
 var q;
 var timerInterval;
-var secondsRemaining = 50;
+var secondsRemaining = 60;
 
 // start quiz
 startBtn.addEventListener("click", startQuiz);
@@ -33,7 +35,6 @@ function startQuiz() {
 }
 
 // start timer
-
 function startTimer() {
     timerInterval = setInterval(function () {
         secondsRemaining--;
@@ -42,10 +43,8 @@ function startTimer() {
         if (secondsRemaining <= 0) {
             clearInterval(timerInterval);
             alert("Out of time!");
-            secondsRemaining = 0;
             inputInitials()
         }
-
     }, 1000);
 }
 
@@ -96,10 +95,8 @@ let questionList = [
 
 
 ]
-// var currentQuestion = []
 
 
-console.log(q)
 // ask questions
 function askQuestion() {
     item.textContent = ""
@@ -109,12 +106,9 @@ function askQuestion() {
     choiceB.innerHTML = q.choiceB;
     choiceC.innerHTML = q.choiceC;
     choiceD.innerHTML = q.choiceD;
-
-    console.log(q.correct)
 }
 
-// register answer and score question
-
+// click to choose and score question
 choiceA.addEventListener("click", scoreQuestion);
 choiceB.addEventListener("click", scoreQuestion);
 choiceC.addEventListener("click", scoreQuestion);
@@ -123,40 +117,37 @@ choiceD.addEventListener("click", scoreQuestion);
 function scoreQuestion(event) {
 
     var buttonSelected = event.target
-    console.log(buttonSelected)
-
     var userResponse = buttonSelected.textContent;
-    console.log(userResponse)
-
-
 
     selectChoices.addEventListener("click", function (event) {
         event.preventDefault();
 
         if (q.correct == userResponse) {
-
             item.textContent = "Correct! The answer is " + q.correct
             quiz.append(item);
 
-            nextButton.textContent = "Next";
-            quiz.append(nextButton);
+            if (questionNumber <= 4) {
+                nextButton.textContent = "Next";
+                quiz.append(nextButton);
+            }
+
+            else  {
+                inputInitials();
+            }
         }
         else {
-            secondsRemaining = secondsRemaining -5;
-
-            if (secondsRemaining <= 0) {
-                clearInterval(timerInterval);
-                alert("Out of time!");
-                secondsRemaining = 0;
-                inputInitials()
-            }
-    
-
+            secondsRemaining - 5;
             item.textContent = "Incorrect. The correct answer is " + q.correct
             quiz.append(item);
 
-            nextButton.textContent = "Next";
-            quiz.append(nextButton);
+            if (questionNumber <= 4) {
+                nextButton.textContent = "Next";
+                quiz.append(nextButton);
+            }
+
+            else  {
+                inputInitials();
+            }
         }
     });
 
@@ -172,18 +163,37 @@ nextButton.addEventListener("click", askQuestion);
 
 
 
-// final score 
+// final score and enter enter-initials
+function inputInitials() {
+    homeScreen.style.display = "none";
+    quiz.style.display = "none";
+    initialsPage.style.display = "block"
+    scorePage.style.display = "none";
 
-// high scores
+    item.textContent = "Your Score is: " + secondsRemaining
+    finalScore.append(item);
+
+}
+
+
+// show high scores
 scoreBtn.addEventListener("click", revealScores);
 
 function revealScores() {
     homeScreen.style.display = "none";
     quiz.style.display = "none";
-    initials.style.display = "none"
+    initialsPage.style.display = "none"
     scorePage.style.display = "block";
 };
 
-function inputInitials() {
 
-}
+
+// return top home screen
+homeBtn.addEventListener("click", returnHome);
+
+function returnHome() {
+    homeScreen.style.display = "block";
+    quiz.style.display = "none";
+    initialsPage.style.display = "none"
+    scorePage.style.display = "none";
+};
