@@ -13,20 +13,21 @@
     <nav>
         <button id="home">Home</button>
         <button id="score">High Scores</button>
-        <div id = "timer">Timer: <span id = "display-time">50</span></div>
+        <div id="timer">Timer: <span id="display-time">50</span></div>
     </nav>
     <!-- Home page main content -->
     <section id="home-screen">
         <h1>Coding Quiz Challenge</h1>
-            <p>Try to answer the following 5 challenge questions before the timer runs out for a high score!
-            </p>
-            <p>You have 60 seconds to start. Incorrect scores will remove 10 seconds from the clock. Click the button to start the quiz.
-            </p>
+        <p>Try to answer the following 5 challenge questions before the timer runs out for a high score!
+        </p>
+        <p>You have 60 seconds to start. Incorrect scores will remove 10 seconds from the clock. Click the button to
+            start the quiz.
+        </p>
         <div></div>
         <button id="start-button" class="btn">Start Quiz!</button>
     </section>
 
-    <section id="quiz"> 
+    <section id="quiz">
         <div id="question">
             <p>Question</p>
         </div>
@@ -38,20 +39,21 @@
         </div>
     </section>
 
-    <section id = "enter-initials">
-        <p id = "final-score"></p>
+    <section id="enter-initials">
+        <p id="final-score"></p>
         <br>
-        <p>Enter Your Initials: </p>
-        <input id= "your-initials" type= text placeholder="Your Initials Here">
-        <button id= "submit" >Submit</button>
+        <form id="form">
+            <label>Enter Your Initials: </label>
+            <input id="your-initials" type=text placeholder="Your Initials Here">
+            <button id="submit">Submit</button>
+        </form>
 
     </section>
 
     <section id="score-page">
         <h2>High Scores!</h2>
-            <p>Your Score:</p>
-            <br>
-            <ol id="score-list"></ol>
+        <br>
+        <ol id="score-list"></ol>
     </section>
     <script src="script.js"></script>
 </body>

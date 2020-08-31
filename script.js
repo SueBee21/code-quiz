@@ -13,7 +13,9 @@ var scoreBtn = document.getElementById("score");
 var scorePage = document.getElementById("score-page");
 var initialsPage = document.getElementById("enter-initials");
 var yourInitials = document.getElementById("your-initials")
+var submitBtn = document.getElementById("submit")
 var finalScore = document.getElementById("final-score")
+var scoreList = document.getElementById("score-list")
 var time = document.getElementById("timer");
 var displayTime = document.getElementById("display-time")
 var item = document.createElement("div");
@@ -41,13 +43,12 @@ function startTimer() {
         displayTime.textContent = secondsRemaining;
 
         if (secondsRemaining <= 0) {
-            clearInterval(timerInterval);
+            clearTimeout(timerInterval);
             alert("Out of time!");
             inputInitials()
         }
     }, 1000);
 }
-
 
 
 // Questions list
@@ -114,6 +115,8 @@ choiceB.addEventListener("click", scoreQuestion);
 choiceC.addEventListener("click", scoreQuestion);
 choiceD.addEventListener("click", scoreQuestion);
 
+nextButton.addEventListener("click", askQuestion);
+
 function scoreQuestion(event) {
 
     var buttonSelected = event.target
@@ -131,7 +134,8 @@ function scoreQuestion(event) {
                 quiz.append(nextButton);
             }
 
-            else  {
+            else {
+                clearTimeout(timerInterval);
                 inputInitials();
             }
         }
@@ -145,7 +149,8 @@ function scoreQuestion(event) {
                 quiz.append(nextButton);
             }
 
-            else  {
+            else {
+                clearTimeout(timerInterval);
                 inputInitials();
             }
         }
@@ -153,15 +158,11 @@ function scoreQuestion(event) {
 
 }
 
-nextButton.addEventListener("click", askQuestion);
-
-// for (var i = 0; i < questionList.length; i++) {
-//     questionNumber[i];
-// }
 
 
-
-
+submitBtn.addEventListener("submit", revealScores) 
+var scoreInitials = yourInitials.textContent
+var finalScore = secondsRemaining
 
 // final score and enter enter-initials
 function inputInitials() {
@@ -170,11 +171,15 @@ function inputInitials() {
     initialsPage.style.display = "block"
     scorePage.style.display = "none";
 
-    item.textContent = "Your Score is: " + secondsRemaining
+
+
+    item.textContent = "Your Score is: " + finalScore
     finalScore.append(item);
 
-}
+    revealScores()
 
+
+}
 
 // show high scores
 scoreBtn.addEventListener("click", revealScores);
@@ -184,6 +189,10 @@ function revealScores() {
     quiz.style.display = "none";
     initialsPage.style.display = "none"
     scorePage.style.display = "block";
+
+    scoreList.textContent = scoreInitials + "=" + finalScore
+    scoreList.append(item)
+
 };
 
 
