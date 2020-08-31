@@ -1,18 +1,26 @@
 // get elements
 var startBtn = document.getElementById("start-button");
 var homeScreen = document.getElementById("home-screen");
-
+var nextButton = document.createElement("button");
 var question = document.getElementById("question");
 var selectChoices = document.getElementById("select-choices");
 var choiceA = document.getElementById("a");
 var choiceB = document.getElementById("b");
 var choiceC = document.getElementById("c");
 var choiceD = document.getElementById("d");
-var scoreBtn = document.getElementById("score")
-var scorePage = document.getElementById("score-page")
-var time = document.getElementById("timer")
-var score = 0
-var correct = []
+var scoreBtn = document.getElementById("score");
+var scorePage = document.getElementById("score-page");
+var initials = document.getElementById("initials");
+var time = document.getElementById("timer");
+var displayTime = document.getElementById("display-time")
+var item = document.createElement("div");
+// var score = [];
+var correct = [];
+var questionNumber = 0;
+var q;
+var timerInterval;
+var secondsRemaining = 50;
+
 // start quiz
 startBtn.addEventListener("click", startQuiz);
 
@@ -21,31 +29,29 @@ function startQuiz() {
     var quiz = document.getElementById("quiz");
     quiz.style.display = "block";
     askQuestion();
-    // startTimer();
+    startTimer();
 }
 
 // start timer
 
-// var secondsRemaining = 5;
+function startTimer() {
+    timerInterval = setInterval(function () {
+        secondsRemaining--;
+        displayTime.textContent = secondsRemaining;
 
-// function startTimer() {
-// var timerInterval = setInterval(function() {
-//     secondsRemaining--;
-//     time.textContent = "Time Remaining:" + secondsRemaining;
+        if (secondsRemaining <= 0) {
+            clearInterval(timerInterval);
+            alert("Out of time!");
+            secondsRemaining = 0;
+            inputInitials()
+        }
 
-//     if(secondsLeft === 0) {
-//       clearInterval(timerInterval);
-//       alert("Out of time!");
-//     }
-
-//   }, 1000);
-// }
-
+    }, 1000);
+}
 
 
 
 // Questions list
-
 let questionList = [
     {
         question: "What tag is used to define the body of the HTML document?",
@@ -91,13 +97,13 @@ let questionList = [
 
 ]
 // var currentQuestion = []
-var questionNumber = 0
-var q = questionList[questionNumber];
+
 
 console.log(q)
 // ask questions
 function askQuestion() {
-
+    item.textContent = ""
+    q = questionList[questionNumber++]
     question.innerHTML = q.question;
     choiceA.innerHTML = q.choiceA;
     choiceB.innerHTML = q.choiceB;
@@ -126,11 +132,9 @@ function scoreQuestion(event) {
 
     selectChoices.addEventListener("click", function (event) {
         event.preventDefault();
-        if (q.correct == userResponse) {
-            
-            score++;
 
-            var item = document.createElement("div");
+        if (q.correct == userResponse) {
+
             item.textContent = "Correct! The answer is " + q.correct
             quiz.append(item);
 
@@ -138,9 +142,16 @@ function scoreQuestion(event) {
             quiz.append(nextButton);
         }
         else {
-        //     timeRemaining -10;
+            secondsRemaining = secondsRemaining -5;
 
-            var item = document.createElement("div");
+            if (secondsRemaining <= 0) {
+                clearInterval(timerInterval);
+                alert("Out of time!");
+                secondsRemaining = 0;
+                inputInitials()
+            }
+    
+
             item.textContent = "Incorrect. The correct answer is " + q.correct
             quiz.append(item);
 
@@ -150,13 +161,13 @@ function scoreQuestion(event) {
     });
 
 }
-// var nextButton = document.createElement("button");
-// nextButton.addEventListener("click", askQuestion);
+
+nextButton.addEventListener("click", askQuestion);
 
 // for (var i = 0; i < questionList.length; i++) {
 //     questionNumber[i];
 // }
- 
+
 
 
 
@@ -164,10 +175,15 @@ function scoreQuestion(event) {
 // final score 
 
 // high scores
-// scoreBtn.addEventListener("click", revealScores);
+scoreBtn.addEventListener("click", revealScores);
 
-// function revealScores(event) {
-//     homeScreen.style.display = "none";
-//     quiz.style.display = "none";
-//     scorePage.style.display = "block";
-// };
+function revealScores() {
+    homeScreen.style.display = "none";
+    quiz.style.display = "none";
+    initials.style.display = "none"
+    scorePage.style.display = "block";
+};
+
+function inputInitials() {
+
+}
