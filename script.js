@@ -161,18 +161,16 @@ function scoreQuestion(event) {
 
 submitBtn.addEventListener("submit", revealScores);
 
-console.log(scoreInitials);
-var finalScore = secondsRemaining;
-
 // final score and enter enter-initials
 function inputInitials() {
+    var finalScore = secondsRemaining;
     homeScreen.style.display = "none";
     quiz.style.display = "none";
     initialsPage.style.display = "block";
-    scorePage.style.display = "none";;
+    scorePage.style.display = "none";
 
     item.textContent = "Your Score is: " + finalScore;
-    finalScore.append(item);
+    item.append(finalScore);
 
     revealScores();
 }
@@ -186,8 +184,8 @@ function revealScores() {
     initialsPage.style.display = "none";
     scorePage.style.display = "block";
 
-    scoreList.textContent = scoreInitials + "=" + finalScore;
-    scoreList.append(item);
+    scoreList.textContent = yourInitials + "=" + finalScore;
+    item.append(scoreList);
 
 };
 
