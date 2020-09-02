@@ -14,7 +14,7 @@ var questionNumber = 0;
 var q;
 
 var nextBtn = document.createElement("button");
-var completeBtn =  document.createElement("button");
+var completeBtn = document.createElement("button");
 
 var scoreBtn = document.getElementById("score");
 var scorePage = document.getElementById("score-page");
@@ -154,7 +154,7 @@ function scoreQuestion(event) {
             else {
                 item.textContent = "Correct! The answer is " + q.correct;
                 quiz.append(item);
-    
+
 
                 completeBtn.textContent = "Score Your Quiz!";
                 quiz.appendChild(completeBtn);
@@ -163,7 +163,7 @@ function scoreQuestion(event) {
             }
         }
         else {
-            secondsRemaining - 5;
+            secondsRemaining = secondsRemaining - 5;
             item.textContent = "Incorrect. The correct answer is " + q.correct;
             quiz.append(item);
 
@@ -173,7 +173,7 @@ function scoreQuestion(event) {
             }
 
             else {
-                secondsRemaining - 5;
+                secondsRemaining -= 5;
                 item.textContent = "Incorrect. The correct answer is " + q.correct;
                 quiz.append(item);
 
@@ -188,6 +188,7 @@ function scoreQuestion(event) {
 }
 completeBtn.addEventListener("click", inputInitials);
 submitBtn.addEventListener("click", revealScores);
+var finalscore = [];
 
 // final score and enter enter-initials
 function inputInitials() {
@@ -213,9 +214,5 @@ function revealScores() {
 
     scoreList.textContent = yourInitials + "=" + finalScore;
     item.append(scoreList);
-
-
-
-
 };
 
