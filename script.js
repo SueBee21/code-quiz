@@ -5,7 +5,7 @@ var homeScreen = document.getElementById("home-screen");
 
 
 var question = document.getElementById("question");
-var selectChoices = document.getElementById("select-choices");
+// var selectChoices = document.getElementById("select-choices");
 var choiceA = document.getElementById("a");
 var choiceB = document.getElementById("b");
 var choiceC = document.getElementById("c");
@@ -13,7 +13,7 @@ var choiceD = document.getElementById("d");
 var questionNumber = 0;
 var q;
 
-var nextBtn = document.createElement("button");
+var nextBtn = document.getElementById("next");
 var completeBtn = document.createElement("button");
 
 var scoreBtn = document.getElementById("score");
@@ -54,7 +54,7 @@ function startQuiz() {
     scorePage.style.display = "none";
     askQuestion();
     startTimer();
-}
+};
 
 // start timer
 function startTimer() {
@@ -66,9 +66,9 @@ function startTimer() {
             clearTimeout(timerInterval);
             alert("Out of time!");
             inputInitials();
-        }
+        };
     }, 1000);
-}
+};
 
 // Questions list
 let questionList = [
@@ -112,19 +112,19 @@ let questionList = [
         choiceD: "D: It opens a new tab in the browser",
         correct: "C: It specifies the color of text",
     },
-]
+];
 
 // ask questions
 function askQuestion() {
     item.textContent = "";
-    // nextBtn.style.display = "none"
+    nextBtn.style.display = "none";
     q = questionList[questionNumber++];
     question.innerHTML = q.question;
     choiceA.innerHTML = q.choiceA;
     choiceB.innerHTML = q.choiceB;
     choiceC.innerHTML = q.choiceC;
     choiceD.innerHTML = q.choiceD;
-}
+};
 
 // click to choose and score question
 choiceA.addEventListener("click", scoreQuestion);
@@ -135,7 +135,7 @@ choiceD.addEventListener("click", scoreQuestion);
 nextBtn.addEventListener("click", askQuestion);
 
 function scoreQuestion(event) {
-
+    nextBtn.style.display = "block";
     var buttonSelected = event.target;
     var userResponse = buttonSelected.textContent;
 
@@ -144,57 +144,49 @@ function scoreQuestion(event) {
         if (questionNumber <= 4) {
             item.textContent = "Correct! The answer is " + q.correct;
             quiz.append(item);
-            nextBtn.textContent = "Next";
-            quiz.append(nextBtn);
-            console.log(secondsRemaining)
         }
 
         else {
             item.textContent = "Correct! The answer is " + q.correct;
             quiz.append(item);
-
-
             completeBtn.textContent = "Score Your Quiz!";
             quiz.appendChild(completeBtn);
-            clearTimeout(timerInterval);
-            console.log(secondsRemaining)
 
-        }
+            nextBtn.style.display = "none";
+            finalScore = secondsRemaining;
+            clearTimeout(timerInterval);
+        };
     }
     else {
-        console.log("wrong answer")
         secondsRemaining = secondsRemaining - 5;
-        console.log(secondsRemaining)
         item.textContent = "Incorrect. The correct answer is " + q.correct;
         quiz.append(item);
 
         if (questionNumber <= 4) {
-            console.log(secondsRemaining)
             item.textContent = "Incorrect. The correct answer is " + q.correct;
             quiz.append(item);
-            nextBtn.textContent = "Next";
-            quiz.append(nextBtn);
         }
 
         else {
-            console.log(secondsRemaining)
             item.textContent = "Incorrect. The correct answer is " + q.correct;
             quiz.append(item);
-
             completeBtn.textContent = "Score Your Quiz!";
             quiz.appendChild(completeBtn);
-            clearTimeout(timerInterval);
 
-        }
-    }
-}
+            nextBtn.style.display = "none";
+            finalScore = secondsRemaining;
+            clearTimeout(timerInterval);
+        };
+    };
+};
+
 completeBtn.addEventListener("click", inputInitials);
-submitBtn.addEventListener("click", revealScores);
+submitBtn.addEventListener("click", saveEntry);
 var finalScore;
 
 // final score and enter enter-initials
 function inputInitials() {
-    finalScore = secondsRemaining;
+    // finalScore = secondsRemaining;
     homeScreen.style.display = "none";
     quiz.style.display = "none";
     initialsPage.style.display = "block";
@@ -203,7 +195,19 @@ function inputInitials() {
     item.textContent = "Your Score is: " + finalScore;
     initialsPage.appendChild(item);
 
-}
+};
+
+// saved initials and high score
+function saveEntry() {
+    var myStringifiedObject = JSON.stringify({yourInitials});
+localStorage.setItem("mySavedScore", myStringifiedObject);
+console.log(myStringifiedObject)
+
+var myParsedObject = JSON.parse(localStorage.getItem("mySavedScore"));
+console.log(myParsedObject) 
+scoreList.push(myParsedObject); 
+};
+
 
 // show high scores
 scoreBtn.addEventListener("click", revealScores);
@@ -214,8 +218,8 @@ function revealScores() {
     initialsPage.style.display = "none";
     scorePage.style.display = "block";
 
-    scoreList.textContent = yourInitials + "=" + finalScore;
+    scoreList.textContent = myParsedObject + "=" + finalScore;
     scorePage.appendChild(scoreList);
-    console.log(scoreList)
 };
+
 

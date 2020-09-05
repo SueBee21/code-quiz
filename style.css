@@ -40,6 +40,12 @@ p {
     margin: auto;
 }
 
+#next {
+    display: none;
+    margin: auto;
+    text-align: center;
+}
+
 /* high scores */
 #score-page {
     display: none;
