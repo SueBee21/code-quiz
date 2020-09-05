@@ -24,7 +24,7 @@ var scoreList = document.getElementById("score-list");
 var initialsPage = document.getElementById("enter-initials");
 var yourInitials = document.getElementById("your-initials");
 var submitBtn = document.getElementById("submit");
-var finalScore = document.getElementById("final-score");
+// var finalScore = document.getElementById("final-score");
 
 var time = document.getElementById("timer");
 var displayTime = document.getElementById("display-time");
@@ -69,7 +69,6 @@ function startTimer() {
         }
     }, 1000);
 }
-
 
 // Questions list
 let questionList = [
@@ -118,6 +117,7 @@ let questionList = [
 // ask questions
 function askQuestion() {
     item.textContent = "";
+    // nextBtn.style.display = "none"
     q = questionList[questionNumber++];
     question.innerHTML = q.question;
     choiceA.innerHTML = q.choiceA;
@@ -139,67 +139,69 @@ function scoreQuestion(event) {
     var buttonSelected = event.target;
     var userResponse = buttonSelected.textContent;
 
-    selectChoices.addEventListener("click", function (event) {
-        event.preventDefault();
+    if (q.correct == userResponse) {
 
-        if (q.correct == userResponse) {
+        if (questionNumber <= 4) {
+            item.textContent = "Correct! The answer is " + q.correct;
+            quiz.append(item);
+            nextBtn.textContent = "Next";
+            quiz.append(nextBtn);
+            console.log(secondsRemaining)
+        }
+
+        else {
             item.textContent = "Correct! The answer is " + q.correct;
             quiz.append(item);
 
-            if (questionNumber <= 4) {
-                nextBtn.textContent = "Next";
-                quiz.append(nextBtn);
-            }
 
-            else {
-                item.textContent = "Correct! The answer is " + q.correct;
-                quiz.append(item);
+            completeBtn.textContent = "Score Your Quiz!";
+            quiz.appendChild(completeBtn);
+            clearTimeout(timerInterval);
+            console.log(secondsRemaining)
 
-
-                completeBtn.textContent = "Score Your Quiz!";
-                quiz.appendChild(completeBtn);
-                clearTimeout(timerInterval);
-
-            }
         }
+    }
+    else {
+        console.log("wrong answer")
+        secondsRemaining = secondsRemaining - 5;
+        console.log(secondsRemaining)
+        item.textContent = "Incorrect. The correct answer is " + q.correct;
+        quiz.append(item);
+
+        if (questionNumber <= 4) {
+            console.log(secondsRemaining)
+            item.textContent = "Incorrect. The correct answer is " + q.correct;
+            quiz.append(item);
+            nextBtn.textContent = "Next";
+            quiz.append(nextBtn);
+        }
+
         else {
-            secondsRemaining = secondsRemaining - 5;
+            console.log(secondsRemaining)
             item.textContent = "Incorrect. The correct answer is " + q.correct;
             quiz.append(item);
 
-            if (questionNumber <= 4) {
-                nextBtn.textContent = "Next";
-                quiz.append(nextBtn);
-            }
+            completeBtn.textContent = "Score Your Quiz!";
+            quiz.appendChild(completeBtn);
+            clearTimeout(timerInterval);
 
-            else {
-                secondsRemaining -= 5;
-                item.textContent = "Incorrect. The correct answer is " + q.correct;
-                quiz.append(item);
-
-                completeBtn.textContent = "Score Your Quiz!";
-                quiz.appendChild(completeBtn);
-                clearTimeout(timerInterval);
-
-            }
         }
-    });
-
+    }
 }
 completeBtn.addEventListener("click", inputInitials);
 submitBtn.addEventListener("click", revealScores);
-var finalscore = [];
+var finalScore;
 
 // final score and enter enter-initials
 function inputInitials() {
-    var finalScore = secondsRemaining;
+    finalScore = secondsRemaining;
     homeScreen.style.display = "none";
     quiz.style.display = "none";
     initialsPage.style.display = "block";
     scorePage.style.display = "none";
 
     item.textContent = "Your Score is: " + finalScore;
-    item.append(finalScore);
+    initialsPage.appendChild(item);
 
 }
 
@@ -213,6 +215,7 @@ function revealScores() {
     scorePage.style.display = "block";
 
     scoreList.textContent = yourInitials + "=" + finalScore;
-    item.append(scoreList);
+    scorePage.appendChild(scoreList);
+    console.log(scoreList)
 };
 
